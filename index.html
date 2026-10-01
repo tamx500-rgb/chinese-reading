@@ -78,18 +78,29 @@
       box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
     }
     .lesson-info h2 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: #0f172a;
       margin-bottom: 4px;
     }
     .lesson-info p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #64748b;
     }
-    .arrow-icon {
-      font-size: 1.4rem;
+    .arrow-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #eff6ff;
       color: var(--primary);
       font-weight: bold;
+      font-size: 0.95rem;
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .lesson-card:hover .arrow-btn {
+      background: var(--primary);
+      color: #ffffff;
     }
     .ipad-tip {
       margin-top: 30px;
@@ -108,40 +119,40 @@
     <header>
       <span class="badge">📖 國語 課文大意自主練習</span>
       <h1>課文大意 互動填空測驗</h1>
-      <p class="sub">請點選要練習的課次，開始進行大意填空！</p>
+      <p class="sub">請點選課次開始挑戰，答對空格會自動變綠色喔！</p>
     </header>
 
     <div class="lesson-list">
       <a href="第一課_蚊帳大使_課文大意填空題.html" class="lesson-card">
         <div class="lesson-info">
           <h2>第一課　蚊帳大使</h2>
-          <p>🎯 填空重點：大使、非洲、義賣、獎狀、鼓舞、響應、瘧疾</p>
+          <p>📝 課文大意線上填空練習</p>
         </div>
-        <div class="arrow-icon">➔</div>
+        <div class="arrow-btn">開始 ➔</div>
       </a>
 
       <a href="第二課_從空中看臺灣_課文大意填空題.html" class="lesson-card">
         <div class="lesson-info">
           <h2>第二課　從空中看臺灣</h2>
-          <p>🎯 填空重點：飛船、飛行、美麗與哀愁、山巒、人禍、善待</p>
+          <p>📝 課文大意線上填空練習</p>
         </div>
-        <div class="arrow-icon">➔</div>
+        <div class="arrow-btn">開始 ➔</div>
       </a>
 
-      <a href="第三課_水俁_課文大意填空題.html" class="lesson-card">
+      <a href="第三課_攀岩高手_課文大意填空題.html" class="lesson-card">
         <div class="lesson-info">
-          <h2>第三課　水俁</h2>
-          <p>🎯 填空重點：水俁病、汙染、求償、揭發、深刻反省</p>
+          <h2>第三課　攀岩高手</h2>
+          <p>📝 課文大意線上填空練習</p>
         </div>
-        <div class="arrow-icon">➔</div>
+        <div class="arrow-btn">開始 ➔</div>
       </a>
 
       <a href="第四課_恆久的美_課文大意填空題.html" class="lesson-card">
         <div class="lesson-info">
           <h2>第四課　恆久的美</h2>
-          <p>🎯 填空重點：飽滿、拾穗、樸實、尊嚴、意志、慷慨、情操、恆久</p>
+          <p>📝 課文大意線上填空練習</p>
         </div>
-        <div class="arrow-icon">➔</div>
+        <div class="arrow-btn">開始 ➔</div>
       </a>
     </div>
 

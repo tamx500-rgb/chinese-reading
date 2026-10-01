@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第四課 恆久的美 - 課文大意互動填空題</title>
+  <style>
+    :root {
+      --primary-color: #d97706;
+      --primary-dark: #b45309;
+      --success-bg: #d1fae5;
+      --success-border: #10b981;
+      --success-text: #065f46;
+      --card-bg: #ffffff;
+      --page-bg: #fffbeb;
+      --text-main: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.8;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border: 2px solid #fef3c7;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      border-bottom: 2px dashed #fde68a;
+      padding-bottom: 16px;
+    }
+
+    .lesson-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #b45309;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #78350f;
+      margin-bottom: 8px;
+    }
+
+    .instructions {
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    /* 進度列 */
+    .progress-wrapper {
+      margin: 20px 0;
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 14px;
+      background: #e2e8f0;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #fbbf24, #d97706);
+      border-radius: 7px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      font-weight: bold;
+      color: #b45309;
+      min-width: 75px;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    /* 文章段落區 */
+    .article-content {
+      background: #fafafa;
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
+      font-size: 1.25rem;
+      color: #334155;
+    }
+
+    .article-content p {
+      margin-bottom: 18px;
+      text-indent: 2em;
+      text-align: justify;
+    }
+
+    .article-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .proper-noun {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* 括號與輸入框 */
+    .blank-slot {
+      display: inline-flex;
+      align-items: baseline;
+      text-indent: 0;
+      margin: 0 2px;
+      font-weight: bold;
+      color: #4b5563;
+    }
+
+    .blank-input {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 2px 6px;
+      margin: 0 3px;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blank-input:focus {
+      border-color: #d97706;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+      background-color: #fffbeb;
+    }
+
+    /* 答對時的綠底樣式 */
+    .blank-input.correct {
+      background-color: var(--success-bg) !important;
+      border: 2px solid var(--success-border) !important;
+      color: var(--success-text) !important;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+      animation: pop 0.35s ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.95); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* 工具按鈕區 (學生版：不含顯示答案按鈕) */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-reset {
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-reset:hover {
+      background-color: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .btn-hint {
+      background-color: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .btn-hint:hover {
+      background-color: #fde68a;
+    }
+
+    /* 完成賀卡 */
+    .congrats-modal {
+      display: none;
+      margin-top: 24px;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid #86efac;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .congrats-modal h3 {
+      color: #166534;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .congrats-modal p {
+      color: #15803d;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="lesson-badge">國語 高年級 閱讀複習</span>
+      <h1>第四課　恆久的美 大意填空</h1>
+      <p class="instructions">請在括號內的空格中填入正確詞語，答案正確時會自動變成<b>綠色底色</b>喔！</p>
+    </header>
+
+    <!-- 完成進度條 -->
+    <div class="progress-wrapper">
+      <span style="font-size: 0.95rem; font-weight: bold; color: #475569;">完成進度：</span>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 / 8 題</div>
+    </div>
+
+    <!-- 課文大意內容 -->
+    <div class="article-content">
+      <p>
+        作者坐火車看見<span class="proper-noun">臺灣</span>南部的稻田與<span class="blank-slot">（<input type="text" class="blank-input" data-answer="飽滿" style="width: 4.5em;" placeholder="??">）</span>的稻穗，想起<span class="proper-noun">法國</span>畫家<span class="proper-noun">米勒</span>創作<span class="blank-slot">（<input type="text" class="blank-input" data-answer="拾穗" style="width: 4.5em;" placeholder="??">）</span>的故事。
+      </p>
+
+      <p>
+        <span class="proper-noun">米勒</span>生長在農家，他移居農村後喚醒童年記憶，用畫筆刻畫農民<span class="blank-slot">（<input type="text" class="blank-input" data-answer="樸實" style="width: 4.5em;" placeholder="??">）</span>的生活。
+      </p>
+
+      <p>
+        畫中的三位婦人雖然貧窮，卻在<span class="proper-noun">米勒</span>筆下展現生命的<span class="blank-slot">（<input type="text" class="blank-input" data-answer="尊嚴" style="width: 4.5em;" placeholder="??">）</span>，呈現人們任勞任怨與樂於分享的生活態度。
+      </p>
+
+      <p>
+        這幅畫美在土地的寬闊深遠、困苦中堅強存活的<span class="blank-slot">（<input type="text" class="blank-input" data-answer="意志" style="width: 4.5em;" placeholder="??">）</span>，以及<span class="blank-slot">（<input type="text" class="blank-input" data-answer="慷慨" style="width: 4.5em;" placeholder="??">）</span>分享生活物質的高貴<span class="blank-slot">（<input type="text" class="blank-input" data-answer="情操" style="width: 4.5em;" placeholder="??">）</span>，滋潤人們的心靈，讓美的感動得以<span class="blank-slot">（<input type="text" class="blank-input" data-answer="恆久" style="width: 4.5em;" placeholder="??">）</span>不斷。
+      </p>
+    </div>
+
+    <!-- 完成恭喜訊息 -->
+    <div class="congrats-modal" id="congratsModal">
+      <h3>🎉 太厲害了！全數答對！ 🎉</h3>
+      <p>你已經完全理解《恆久的美》的課文大意與核心重點了！</p>
+    </div>
+
+    <!-- 功能按鈕 (學生版：無顯示答案按鈕) -->
+    <div class="controls">
+      <button class="btn btn-hint" onclick="showHint()">💡 提示首字</button>
+      <button class="btn btn-reset" onclick="resetAll()">🔄 重新練習</button>
+    </div>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.blank-input');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const congratsModal = document.getElementById('congratsModal');
+    const totalCount = inputs.length;
+
+    // 檢查輸入答案
+    function checkAnswer(input) {
+      const target = input.getAttribute('data-answer').trim();
+      const userVal = input.value.trim();
+
+      if (userVal === target) {
+        if (!input.classList.contains('correct')) {
+          input.classList.add('correct');
+        }
+      } else {
+        input.classList.remove('correct');
+      }
+
+      updateProgress();
+    }
+
+    // 更新進度與結算
+    function updateProgress() {
+      let correctCount = 0;
+      inputs.forEach(input => {
+        if (input.classList.contains('correct')) {
+          correctCount++;
+        }
+      });
+
+      const percentage = Math.round((correctCount / totalCount) * 100);
+      progressBar.style.width = percentage + '%';
+      progressText.textContent = `${correctCount} / ${totalCount} 題`;
+
+      if (correctCount === totalCount) {
+        congratsModal.style.display = 'block';
+      } else {
+        congratsModal.style.display = 'none';
+      }
+    }
+
+    // 綁定輸入與鍵盤事件
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        checkAnswer(input);
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const nextInput = inputs[index + 1];
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+      });
+    });
+
+    // 提示功能（提示首字）
+    function showHint() {
+      inputs.forEach(input => {
+        if (!input.classList.contains('correct')) {
+          const ans = input.getAttribute('data-answer');
+          input.placeholder = ans[0] + '...';
+        }
+      });
+    }
+
+    // 重新開始
+    function resetAll() {
+      inputs.forEach(input => {
+        input.value = '';
+        input.placeholder = '??';
+        input.classList.remove('correct');
+      });
+      updateProgress();
+      if (inputs.length > 0) inputs[0].focus();
+    }
+  </script>
+</body>
+</html>

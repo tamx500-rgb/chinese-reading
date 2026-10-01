@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第三課 攀岩高手 - 課文大意互動填空題</title>
+  <style>
+    :root {
+      --primary-color: #059669;
+      --primary-dark: #047857;
+      --primary-light: #d1fae5;
+      --success-bg: #dcfce7;
+      --success-border: #16a34a;
+      --success-text: #14532d;
+      --card-bg: #ffffff;
+      --page-bg: #f0fdf4;
+      --text-main: #1f2937;
+      --text-sub: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      padding: 28px 16px;
+      line-height: 1.85;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* 慶祝紙花畫布 */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .container {
+      max-width: 880px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 12px 30px rgba(5, 150, 105, 0.08);
+      border: 2px solid #bbf7d0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      border-bottom: 2px dashed #86efac;
+      padding-bottom: 18px;
+    }
+
+    .lesson-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 4px 16px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      border: 1px solid #a7f3d0;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: #064e3b;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .instructions {
+      color: var(--text-sub);
+      font-size: 1.05rem;
+    }
+
+    .instructions b {
+      color: var(--primary-dark);
+    }
+
+    /* 進度列 */
+    .progress-wrapper {
+      margin: 22px 0;
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 16px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #34d399, #059669);
+      border-radius: 8px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      font-weight: bold;
+      color: var(--primary-dark);
+      min-width: 85px;
+      text-align: right;
+      font-size: 1.05rem;
+    }
+
+    /* 文章段落區 */
+    .article-content {
+      background: #fcfdfd;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1.5px solid #e2e8f0;
+      font-size: 1.25rem;
+      color: #1e293b;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .article-content p {
+      margin-bottom: 20px;
+      text-indent: 2em;
+      text-align: justify;
+      line-height: 2.1;
+    }
+
+    .article-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 括號與輸入框 */
+    .blank-slot {
+      display: inline-flex;
+      align-items: baseline;
+      text-indent: 0;
+      margin: 0 3px;
+      font-weight: bold;
+      color: #334155;
+    }
+
+    .blank-num {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-right: 2px;
+      user-select: none;
+    }
+
+    .blank-input {
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 3px 6px;
+      margin: 0 4px;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blank-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+      background-color: #f0fdf4;
+    }
+
+    /* 答對時的綠底樣式（題意核心要求：底色變化） */
+    .blank-input.correct {
+      background-color: var(--success-bg) !important;
+      border: 2px solid var(--success-border) !important;
+      color: var(--success-text) !important;
+      box-shadow: 0 0 10px rgba(22, 163, 74, 0.35);
+      animation: pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.92); }
+      60% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* 工具按鈕區 */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 26px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 11px 22px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-reset {
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-reset:hover {
+      background-color: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .btn-hint {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .btn-hint:hover {
+      background-color: #fde68a;
+    }
+
+    .btn-show {
+      background-color: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .btn-show:hover {
+      background-color: #a7f3d0;
+    }
+
+    /* 完成賀卡 */
+    .congrats-modal {
+      display: none;
+      margin-top: 26px;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid #86efac;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.15);
+    }
+
+    .congrats-modal h3 {
+      color: #14532d;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .congrats-modal p {
+      color: #166534;
+      font-size: 1.05rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 響應式調整 */
+    @media (max-width: 640px) {
+      .container {
+        padding: 22px 18px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .article-content {
+        padding: 18px 14px;
+        font-size: 1.15rem;
+      }
+      .blank-input {
+        font-size: 1.1rem;
+        padding: 2px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="container">
+    <header>
+      <span class="lesson-badge">國語 五上 閱讀理解</span>
+      <h1>第三課　攀岩高手 課文大意填空</h1>
+      <p class="instructions">請在括號內的空格填入正確詞語（<b>全為課文原詞</b>），答對時會自動變成<b>綠色底色</b>喔！</p>
+    </header>
+
+    <!-- 完成進度條 -->
+    <div class="progress-wrapper">
+      <span style="font-size: 1rem; font-weight: bold; color: #475569;">完成進度：</span>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 / 10 題</div>
+    </div>
+
+    <!-- 課文大意內容 (共10題，皆為課文內用詞) -->
+    <div class="article-content">
+      <p>
+        這首詩以擬人手法描寫一位攀岩高手，在<span class="blank-slot"><span class="blank-num">①</span>（<input type="text" class="blank-input" data-answer="陡峭" style="width: 4.5em;" placeholder="??">）</span>的岩壁上不斷向上攀爬。
+      </p>
+
+      <p>
+        他擁有強勁的<span class="blank-slot"><span class="blank-num">②</span>（<input type="text" class="blank-input" data-answer="吸盤" style="width: 4.5em;" placeholder="??">）</span>作為精密的<span class="blank-slot"><span class="blank-num">③</span>（<input type="text" class="blank-input" data-answer="裝備" style="width: 4.5em;" placeholder="??">）</span>，並以高聳的雲端作為唯一的奮鬥目標。
+      </p>
+
+      <p>
+        在往上攀爬的過程中，口渴時有黑夜冰鎮的<span class="blank-slot"><span class="blank-num">④</span>（<input type="text" class="blank-input" data-answer="露珠" style="width: 4.5em;" placeholder="??">）</span>涼水解渴，飢餓時有陽光炒熟的金色麵條來<span class="blank-slot"><span class="blank-num">⑤</span>（<input type="text" class="blank-input" data-answer="充飢" style="width: 4.5em;" placeholder="??">）</span>。
+      </p>
+
+      <p>
+        即使遇到狂風像隱形的<span class="blank-slot"><span class="blank-num">⑥</span>（<input type="text" class="blank-input" data-answer="繩索" style="width: 4.5em;" placeholder="??">）</span>反覆扯後腿，或是暴雨像<span class="blank-slot"><span class="blank-num">⑦</span>（<input type="text" class="blank-input" data-answer="尖銳" style="width: 4.5em;" placeholder="??">）</span>的冷箭一再刺向全身，他也絕不輕易退縮。
+      </p>
+
+      <p>
+        他盡心伸長堅韌的<span class="blank-slot"><span class="blank-num">⑧</span>（<input type="text" class="blank-input" data-answer="虯鬚" style="width: 4.5em;" placeholder="??">）</span>，盡力展開<span class="blank-slot"><span class="blank-num">⑨</span>（<input type="text" class="blank-input" data-answer="繁茂" style="width: 4.5em;" placeholder="??">）</span>的綠葉，勇敢迎向光明與盼望。全詩最後揭開謎底，原來這位堅定不拔的攀岩高手，就是不斷向上蔓生的<span class="blank-slot"><span class="blank-num">⑩</span>（<input type="text" class="blank-input" data-answer="爬牆虎" style="width: 5.5em;" placeholder="???">）</span>！
+      </p>
+    </div>
+
+    <!-- 完成恭喜訊息 -->
+    <div class="congrats-modal" id="congratsModal">
+      <h3>🎉 太棒了！全數答對！你真是一位攀岩高手！ 🎉</h3>
+      <p>你已經完全理解《攀岩高手》的課文大意，並熟記了詩中的精采詞彙！</p>
+    </div>
+
+    <!-- 功能按鈕 -->
+    <div class="controls">
+      <button class="btn btn-hint" onclick="showHint()">💡 提示首字</button>
+      <button class="btn btn-show" onclick="showAllAnswers()">👀 顯示答案</button>
+      <button class="btn btn-reset" onclick="resetAll()">🔄 重新練習</button>
+    </div>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.blank-input');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const congratsModal = document.getElementById('congratsModal');
+    const totalCount = inputs.length;
+    let celebrated = false;
+
+    // 檢查單格輸入答案
+    function checkAnswer(input) {
+      const target = input.getAttribute('data-answer').trim();
+      const userVal = input.value.trim();
+
+      if (userVal === target) {
+        if (!input.classList.contains('correct')) {
+          input.classList.add('correct');
+        }
+      } else {
+        input.classList.remove('correct');
+      }
+
+      updateProgress();
+    }
+
+    // 更新進度條與完成判定
+    function updateProgress() {
+      let correctCount = 0;
+      inputs.forEach(input => {
+        if (input.classList.contains('correct')) {
+          correctCount++;
+        }
+      });
+
+      const percentage = Math.round((correctCount / totalCount) * 100);
+      progressBar.style.width = percentage + '%';
+      progressText.textContent = `${correctCount} / ${totalCount} 題`;
+
+      if (correctCount === totalCount) {
+        congratsModal.style.display = 'block';
+        if (!celebrated) {
+          launchConfetti();
+          celebrated = true;
+        }
+      } else {
+        congratsModal.style.display = 'none';
+        celebrated = false;
+      }
+    }
+
+    // 綁定輸入與鍵盤跳格事件
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        checkAnswer(input);
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const nextInput = inputs[index + 1];
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+      });
+    });
+
+    // 提示功能（提示詞語第1個字）
+    function showHint() {
+      inputs.forEach(input => {
+        if (!input.classList.contains('correct')) {
+          const ans = input.getAttribute('data-answer');
+          input.placeholder = ans[0] + '..';
+        }
+      });
+    }
+
+    // 顯示所有答案（教師教學展示或檢討用）
+    function showAllAnswers() {
+      inputs.forEach(input => {
+        const ans = input.getAttribute('data-answer');
+        input.value = ans;
+        input.classList.add('correct');
+      });
+      updateProgress();
+    }
+
+    // 重新開始練習
+    function resetAll() {
+      inputs.forEach(input => {
+        input.value = '';
+        const ans = input.getAttribute('data-answer');
+        input.placeholder = '?'.repeat(ans.length);
+        input.classList.remove('correct');
+      });
+      updateProgress();
+      if (inputs.length > 0) inputs[0].focus();
+    }
+
+    // 彩帶紙花動畫效果 (輕量純 Canvas 實現)
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#10b981', '#059669', '#34d399', '#f59e0b', '#3b82f6', '#ec4899'];
+
+      for (let i = 0; i < 90; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4,
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          rotation: Math.random() * 360,
+          rotSpeed: Math.random() * 4 - 2
+        });
+      }
+
+      let animationFrame;
+      let frameCount = 0;
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.rotation += p.rotSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        });
+
+        frameCount++;
+        if (frameCount < 150) {
+          animationFrame = requestAnimationFrame(render);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+
+      render();
+    }
+
+    // 視窗調整大小時更新 Canvas 尺寸
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('confetti-canvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    });
+  </script>
+</body>
+</html>

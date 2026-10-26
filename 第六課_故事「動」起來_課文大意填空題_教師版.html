@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第六課 故事「動」起來 - 課文大意填空題【教師參考版】</title>
+  <style>
+    :root {
+      --primary-color: #7c3aed;
+      --primary-dark: #6d28d9;
+      --success-bg: #d1fae5;
+      --success-border: #10b981;
+      --success-text: #065f46;
+      --card-bg: #ffffff;
+      --page-bg: #f5f3ff;
+      --text-main: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.8;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 860px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border: 2px solid #e2e8f0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      border-bottom: 2px dashed #ddd6fe;
+      padding-bottom: 16px;
+    }
+
+    .lesson-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 0.95rem;
+      font-weight: bold;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #1e1b4b;
+      margin-bottom: 10px;
+    }
+
+    .instructions {
+      font-size: 1.05rem;
+      color: #4b5563;
+    }
+
+    /* 進度條區域 */
+    .progress-wrapper {
+      margin-bottom: 22px;
+      background: #f8fafc;
+      padding: 12px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar-bg {
+      flex-grow: 1;
+      height: 14px;
+      background: #e2e8f0;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #34d399, #10b981);
+      border-radius: 7px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      font-weight: bold;
+      color: #047857;
+      min-width: 75px;
+      text-align: right;
+      font-size: 0.95rem;
+    }
+
+    /* 文章段落區 */
+    .article-content {
+      background: #fafafa;
+      border-radius: 14px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
+      font-size: 1.25rem;
+      color: #334155;
+    }
+
+    .article-content p {
+      margin-bottom: 18px;
+      text-indent: 2em;
+      text-align: justify;
+    }
+
+    .article-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .proper-noun {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* 括號與輸入框 */
+    .blank-slot {
+      display: inline-flex;
+      align-items: baseline;
+      text-indent: 0;
+      margin: 0 2px;
+      font-weight: bold;
+      color: #4b5563;
+    }
+
+    .blank-input {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 2px 6px;
+      margin: 0 3px;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .blank-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    }
+
+    /* 答對時的視覺回饋 */
+    .blank-input.correct {
+      background-color: var(--success-bg) !important;
+      border: 2px solid var(--success-border) !important;
+      color: var(--success-text) !important;
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* 按鈕操作區 */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-show {
+      background-color: #ede9fe;
+      color: #5b21b6;
+      border: 1px solid #ddd6fe;
+    }
+
+    .btn-show:hover {
+      background-color: #ddd6fe;
+    }
+
+    .btn-hint {
+      background-color: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-hint:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn-reset {
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-reset:hover {
+      background-color: #e2e8f0;
+    }
+
+    /* 完成通關動畫 Modal */
+    .congrats-modal {
+      display: none;
+      margin-top: 24px;
+      background: #ecfdf5;
+      border: 2px solid #6ee7b7;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .congrats-modal h3 {
+      color: #166534;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .congrats-modal p {
+      color: #15803d;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="lesson-badge">🍎 教師專用參考版</span>
+      <h1>第六課　故事「動」起來 大意填空</h1>
+      <p class="instructions">請在括號內的空格中填入正確詞語，答案正確時會自動變成<b>綠色底色</b>喔！</p>
+    </header>
+
+    <!-- 完成進度條 -->
+    <div class="progress-wrapper">
+      <span style="font-size: 0.95rem; font-weight: bold; color: #475569;">完成進度：</span>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 / 8 題</div>
+    </div>
+
+    <!-- 課文大意內容 -->
+    <div class="article-content">
+      <p>
+        動畫是融合繪畫、音樂和文學的影音<span class="blank-slot">（<input type="text" class="blank-input" data-answer="藝術" style="width: 4.5em;" placeholder="??">）</span>，已成為現代人不可或缺的娛樂。
+      </p>
+
+      <p>
+        <span class="proper-noun">華特．迪士尼</span>發行聲音與畫面<span class="blank-slot">（<input type="text" class="blank-input" data-answer="同步" style="width: 4.5em;" placeholder="??">）</span>的<span class="proper-noun">汽船威利號</span>，之後更推出第一部彩色動畫長片<span class="proper-noun">白雪公主</span>，成了經典動畫長片的<span class="blank-slot">（<input type="text" class="blank-input" data-answer="開端" style="width: 4.5em;" placeholder="??">）</span>。
+      </p>
+
+      <p>
+        <span class="proper-noun">吉卜力工作室</span>打破傳統框架，融入<span class="blank-slot">（<input type="text" class="blank-input" data-answer="人文關懷" style="width: 6.5em;" placeholder="??">）</span>的題材，觸動人心並引起廣大觀眾的<span class="blank-slot">（<input type="text" class="blank-input" data-answer="共鳴" style="width: 4.5em;" placeholder="??">）</span>。
+      </p>
+
+      <p>
+        <span class="proper-noun">皮克斯動畫工作室</span>在數位科技進步中<span class="blank-slot">（<input type="text" class="blank-input" data-answer="脫穎而出" style="width: 6.5em;" placeholder="??">）</span>，推出首部3D電腦動畫長片<span class="proper-noun">玩具總動員</span>，在技術與藝術層面上<span class="blank-slot">（<input type="text" class="blank-input" data-answer="精益求精" style="width: 6.5em;" placeholder="??">）</span>。
+      </p>
+
+      <p>
+        動畫藝術師們的創作心血，賦予故事生命，也為人們的<span class="blank-slot">（<input type="text" class="blank-input" data-answer="心靈" style="width: 4.5em;" placeholder="??">）</span>注入新的活水。
+      </p>
+    </div>
+
+    <!-- 完成恭喜訊息 -->
+    <div class="congrats-modal" id="congratsModal">
+      <h3>🎉 太厲害了！全數答對！ 🎉</h3>
+      <p>你已經完全理解《故事「動」起來》的課文大意與核心重點了！</p>
+    </div>
+
+    <!-- 功能按鈕 (教師版：含顯示答案) -->
+    <div class="controls">
+      <button class="btn btn-show" onclick="showAllAnswers()">👀 顯示全部答案</button>
+      <button class="btn btn-hint" onclick="showHint()">💡 提示首字</button>
+      <button class="btn btn-reset" onclick="resetAll()">🔄 重新練習</button>
+    </div>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.blank-input');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const congratsModal = document.getElementById('congratsModal');
+    const totalCount = inputs.length;
+
+    // 檢查輸入答案
+    function checkAnswer(input) {
+      const target = input.getAttribute('data-answer').trim();
+      const userVal = input.value.trim();
+
+      if (userVal === target) {
+        if (!input.classList.contains('correct')) {
+          input.classList.add('correct');
+        }
+      } else {
+        input.classList.remove('correct');
+      }
+
+      updateProgress();
+    }
+
+    // 更新進度與結算
+    function updateProgress() {
+      let correctCount = 0;
+      inputs.forEach(input => {
+        if (input.classList.contains('correct')) {
+          correctCount++;
+        }
+      });
+
+      const percentage = Math.round((correctCount / totalCount) * 100);
+      progressBar.style.width = percentage + '%';
+      progressText.textContent = `${correctCount} / ${totalCount} 題`;
+
+      if (correctCount === totalCount) {
+        congratsModal.style.display = 'block';
+      } else {
+        congratsModal.style.display = 'none';
+      }
+    }
+
+    // 綁定輸入與鍵盤事件
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        checkAnswer(input);
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const nextInput = inputs[index + 1];
+          if (nextInput) {
+            nextInput.focus();
+          }
+        }
+      });
+    });
+
+    // 一鍵顯示答案（教師示範用）
+    function showAllAnswers() {
+      inputs.forEach(input => {
+        const ans = input.getAttribute('data-answer');
+        input.value = ans;
+        input.classList.add('correct');
+      });
+      updateProgress();
+    }
+
+    // 提示功能（提示首字）
+    function showHint() {
+      inputs.forEach(input => {
+        if (!input.classList.contains('correct')) {
+          const ans = input.getAttribute('data-answer');
+          input.placeholder = ans[0] + '...';
+        }
+      });
+    }
+
+    // 重新開始
+    function resetAll() {
+      inputs.forEach(input => {
+        input.value = '';
+        input.placeholder = '??';
+        input.classList.remove('correct');
+      });
+      updateProgress();
+      if (inputs.length > 0) inputs[0].focus();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>國語課文大意 互動填空練習站</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 0.95rem;
+      font-weight: bold;
+      padding: 4px 16px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    p.sub {
+      color: #64748b;
+      font-size: 1rem;
+    }
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .lesson-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 20px 24px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lesson-card:active, .lesson-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+    }
+    .lesson-info h2 {
+      font-size: 1.3rem;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .lesson-info p {
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+    .arrow-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #eff6ff;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+    .lesson-card:hover .arrow-btn {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .ipad-tip {
+      margin-top: 30px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #166534;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">📖 國語 課文大意自主練習</span>
+      <h1>課文大意 互動填空測驗</h1>
+      <p class="sub">請點選課次開始挑戰，答對空格會自動變綠色喔！</p>
+    </header>
+
+    <div class="lesson-list">
+      <a href="第一課_蚊帳大使_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第一課　蚊帳大使</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+
+      <a href="第二課_從空中看臺灣_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第二課　從空中看臺灣</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+
+      <a href="第三課_攀岩高手_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第三課　攀岩高手</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+
+      <a href="第四課_恆久的美_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第四課　恆久的美</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+
+      <a href="第五課_它抓得住你─商標的故事_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第五課　它抓得住你─商標的故事</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+
+      <a href="第六課_故事「動」起來_課文大意填空題.html" class="lesson-card">
+        <div class="lesson-info">
+          <h2>第六課　故事「動」起來</h2>
+          <p>📝 課文大意線上填空練習</p>
+        </div>
+        <div class="arrow-btn">開始 ➔</div>
+      </a>
+    </div>
+
+    <div class="ipad-tip">
+      💡 <b>iPad 學生小撇步</b>：點擊 Safari 上方或下方的「分享按鈕（帶箭頭的方框 ⎋）」➔ 選擇「<b>加入主畫面</b>」，以後點桌面就能直接進來練習囉！
+    </div>
+  </div>
+</body>
+</html>
